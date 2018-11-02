@@ -15,29 +15,26 @@ class BookmarksController extends Controller
 
     public function index()
     {
-        $bookmarks = DB::table('bookmarks')->simplePaginate(10);
-        if (!empty($bookmarks)){
-            foreach($bookmarks as &$bookmark){
-                $bookmark->category = Category::find($bookmark->category_id);
-            }
-        }
+        $bookmarks = Bookmark::with(['category:id,title'])->simplePaginate(10);
 
-        return view('bookmarks.index', ['bookmarks' => $bookmarks]);
+        return view('admin.bookmarks.index', ['bookmarks' => $bookmarks]);
     }
 
     public function add()
     {
-        $categories = DB::table('categories')->select('id','title')->get();
+        $data['method'] = __FUNCTION__;
+        $data['categories'] = Category::orderBy('title', 'asc')->get();
 
-        return view('bookmarks.form', ['method' => __FUNCTION__, 'categories' => $categories]);
+        return view('admin.bookmarks.form', $data);
     }
 
     public function edit($bookmark_id)
     {
-        $bookmark = DB::table('bookmarks')->find($bookmark_id);
-        $categories = DB::table('categories')->select('id','title')->get();
+        $data['method'] = __FUNCTION__;
+        $data['bookmark'] = Bookmark::with(['tags'])->find($bookmark_id);
+        $data['categories'] = Category::orderBy('title', 'asc')->get();
 
-        return view('bookmarks.form', ['method' => __FUNCTION__, 'bookmark' => $bookmark, 'categories' => $categories]);
+        return view('admin.bookmarks.form', $data);
     }
 
     public function store(Request $request)

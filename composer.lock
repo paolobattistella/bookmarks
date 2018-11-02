@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c1ebefd440dc8d75f6239c77dca59c5a",
-    "content-hash": "de31091aa6106ff9db641c8d81e5e730",
+    "hash": "14b7727a5319469f6e4004e7cf48524d",
+    "content-hash": "98b2b5c94eb73b2ed52108235901d761",
     "packages": [
         {
             "name": "davejamesmiller/laravel-breadcrumbs",
@@ -511,48 +511,6 @@
                 }
             ],
             "time": "2015-04-20 18:58:01"
-        },
-        {
-            "name": "laravel-frontend-presets/bulma",
-            "version": "v2.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel-frontend-presets/bulma.git",
-                "reference": "fce973525abead2f85596a3bd6fc0d2b12356cc6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel-frontend-presets/bulma/zipball/fce973525abead2f85596a3bd6fc0d2b12356cc6",
-                "reference": "fce973525abead2f85596a3bd6fc0d2b12356cc6",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": "^5.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "LaravelFrontendPresets\\BulmaPreset\\BulmaPresetServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "LaravelFrontendPresets\\BulmaPreset\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Bulma Frontend Preset For Laravel Framework 5.5 and Up",
-            "keywords": [
-                "bulma",
-                "laravel",
-                "preset"
-            ],
-            "time": "2018-09-22 14:25:56"
         },
         {
             "name": "laravel/framework",

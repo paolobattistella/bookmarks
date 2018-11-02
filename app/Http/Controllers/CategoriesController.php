@@ -12,21 +12,21 @@ class CategoriesController extends Controller
 
     public function index()
     {
-        $categories = DB::table('categories')->simplePaginate(10);
+        $categories = Category::simplePaginate(10);
 
-        return view('categories.index', ['categories' => $categories]);
+        return view('admin.categories.index', ['categories' => $categories]);
     }
 
     public function add()
     {
-        return view('categories.form', ['method' => __FUNCTION__]);
+        return view('admin.categories.form', ['method' => __FUNCTION__]);
     }
 
     public function edit($category_id)
     {
         $category = DB::table('categories')->find($category_id);
 
-        return view('categories.form', ['method' => __FUNCTION__, 'category' => $category]);
+        return view('admin.categories.form', ['method' => __FUNCTION__, 'category' => $category]);
     }
 
     public function store(Request $request)

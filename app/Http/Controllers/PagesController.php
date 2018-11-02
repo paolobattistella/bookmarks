@@ -10,7 +10,9 @@ class PagesController extends Controller
 {
     public function dashboard()
     {
-        return view('pages.dashboard', ['counters' => self::counters()]);
+        $latest_bookmarks = Bookmark::orderBy('created_at', 'desc')->take(10)->get(['id','title']);
+
+        return view('pages.dashboard', ['counters' => self::counters(), 'latest_bookmarks' => $latest_bookmarks]);
     }
 
     protected function counters()

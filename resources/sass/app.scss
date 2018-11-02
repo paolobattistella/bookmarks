@@ -1,6 +1,7 @@
 
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/2.8.94/css/materialdesignicons.min.css);
 
 // Variables
-@import "bulma";
+//@import './initial-variables.sass'
+@import './node_modules/bulma/bulma.sass'

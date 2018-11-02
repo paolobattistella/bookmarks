@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,16 +12,13 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
-        // set current route name in templates
-        view()->composer('*', function ($view) {
-
-            $current_route_name = \Request::route()->getName();
-            $view->with('current_route_name', $current_route_name);
-
-        });
-    }
+     public function boot()
+     {
+         view()->composer('*', function($view)
+         {
+             $view->with('current_route_name', Route::getCurrentRoute()->getName());
+         });
+     }
 
     /**
      * Register any application services.

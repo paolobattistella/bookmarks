@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('bookmarks', 'PagesController@bookmarks')->name('pages_bookmarks');
+Route::get('/', 'PagesController@bookmarks')->name('pages_bookmarks');
 
 Route::prefix('admin')->group(function () {
 

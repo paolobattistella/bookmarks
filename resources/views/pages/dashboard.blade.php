@@ -34,70 +34,32 @@
     <div class="column is-6">
         <div class="card events-card">
             <header class="card-header">
-                <p class="card-header-title">
-                    Events
-                </p>
+                <p class="card-header-title">Ultimi segnalibri</p>
                 <a href="#" class="card-header-icon" aria-label="more options">
-  <span class="icon">
-    <i class="fa fa-angle-down" aria-hidden="true"></i>
-  </span>
-</a>
+                  <span class="icon">
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </a>
             </header>
             <div class="card-table">
                 <div class="content">
                     <table class="table is-fullwidth is-striped">
                         <tbody>
+                        @if ($latest_bookmarks->count() > 0)
+                        @foreach ($latest_bookmarks as $bookmark)
                             <tr>
                                 <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                <td>Lorum ipsum dolem aire</td>
-                                <td><a class="button is-small is-primary" href="#">Action</a></td>
+                                <td>{{ $bookmark->title }}</td>
+                                <td><a href="{{ route('admin.bookmarks_edit', ['id' => $bookmark->id]) }}" class="is-icon has-text-info"><i class="mdi mdi-24px mdi-playlist-edit"></i></a></td>
                             </tr>
-                            <tr>
-                                <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                <td>Lorum ipsum dolem aire</td>
-                                <td><a class="button is-small is-primary" href="#">Action</a></td>
-                            </tr>
-                            <tr>
-                                <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                <td>Lorum ipsum dolem aire</td>
-                                <td><a class="button is-small is-primary" href="#">Action</a></td>
-                            </tr>
-                            <tr>
-                                <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                <td>Lorum ipsum dolem aire</td>
-                                <td><a class="button is-small is-primary" href="#">Action</a></td>
-                            </tr>
-                            <tr>
-                                <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                <td>Lorum ipsum dolem aire</td>
-                                <td><a class="button is-small is-primary" href="#">Action</a></td>
-                            </tr>
-                            <tr>
-                                <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                <td>Lorum ipsum dolem aire</td>
-                                <td><a class="button is-small is-primary" href="#">Action</a></td>
-                            </tr>
-                            <tr>
-                                <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                <td>Lorum ipsum dolem aire</td>
-                                <td><a class="button is-small is-primary" href="#">Action</a></td>
-                            </tr>
-                            <tr>
-                                <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                <td>Lorum ipsum dolem aire</td>
-                                <td><a class="button is-small is-primary" href="#">Action</a></td>
-                            </tr>
-                            <tr>
-                                <td width="5%"><i class="fa fa-bell-o"></i></td>
-                                <td>Lorum ipsum dolem aire</td>
-                                <td><a class="button is-small is-primary" href="#">Action</a></td>
-                            </tr>
+                        @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>
             </div>
             <footer class="card-footer">
-                <a href="#" class="card-footer-item">View All</a>
+                <a href="{{ route('admin.bookmarks_index') }}" class="card-footer-item">Mostra tutti</a>
             </footer>
         </div>
     </div>

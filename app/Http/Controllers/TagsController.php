@@ -12,21 +12,21 @@ class TagsController extends Controller
 
     public function index()
     {
-        $tags = DB::table('tags')->simplePaginate(10);
+        $tags = Tag::simplePaginate(10);
 
-        return view('tags.index', ['tags' => $tags]);
+        return view('admin.tags.index', ['tags' => $tags]);
     }
 
     public function add()
     {
-        return view('tags.form', ['method' => __FUNCTION__]);
+        return view('admin.tags.form', ['method' => __FUNCTION__]);
     }
 
     public function edit($tag_id)
     {
         $tag = DB::table('tags')->find($tag_id);
 
-        return view('tags.form', ['method' => __FUNCTION__, 'tag' => $tag]);
+        return view('admin.tags.form', ['method' => __FUNCTION__, 'tag' => $tag]);
     }
 
     public function store(Request $request)

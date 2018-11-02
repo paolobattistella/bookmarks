@@ -1,7 +1,6 @@
 @extends('layouts.public')
 
 @section('content')
-
 <div class="section">
     <div class="box">
         <div class="field has-addons">
@@ -14,7 +13,7 @@
         </div>
     </div>
 
-    @if (sizeof($bookmarks)>0)
+    @if ($bookmarks->count() > 0)
     <div class="tile is-ancestor">
         @foreach ($bookmarks as $bookmark)
         <div class="tile is-3 is-parent">
@@ -35,6 +34,9 @@
                 @endif
             </article>
         </div>
+        @if (($loop->iteration % 4) == 0)
+    </div><div class="tile is-ancestor">
+        @endif
         @endforeach
     </div>
     @endif

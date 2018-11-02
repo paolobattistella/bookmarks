@@ -5,10 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bookmarks Admin - @yield('title')</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/2.8.94/css/materialdesignicons.min.css">
-    <!-- Bulma Version 0.7.2-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
-    <link rel="stylesheet" type="text/css" href="../css/app.css">
+    <link rel="stylesheet" type="text/css" href="../../css/app.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
     <!-- START NAV -->
@@ -66,6 +64,7 @@
             </div>
         </div>
     </div>
-    <script async type="text/javascript" src="../js/bulma.js"></script>
+    <script src="../../js/app.js"></script>
+    <script async type="text/javascript" src="../../js/bulma.js"></script>
 </body>
 </html>
