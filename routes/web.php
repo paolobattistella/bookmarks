@@ -20,6 +20,8 @@ Route::prefix('admin')->group(function () {
     Route::get('bookmarks', 'BookmarksController@index')->name('admin.bookmarks_index');
     Route::get('bookmarks/add', 'BookmarksController@add')->name('admin.bookmarks_add');
     Route::get('bookmarks/edit/{id}', 'BookmarksController@edit')->name('admin.bookmarks_edit');
+    Route::get('bookmarks/search', 'BookmarksController@search')->name('admin.bookmarks_search');
+    Route::get('bookmarks/latest/{limit?}', 'BookmarksController@latest')->name('admin.bookmarks_latest');
     Route::post('bookmarks/store', 'BookmarksController@store')->name('admin.bookmarks_store');
     Route::get('bookmarks/delete/{id}', 'BookmarksController@delete')->name('admin.bookmarks_delete');
     Route::get('bookmarks/goto/{id}', 'BookmarksController@goTo')->name('admin.bookmarks_goto');

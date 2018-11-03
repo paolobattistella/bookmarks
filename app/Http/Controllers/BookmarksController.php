@@ -37,6 +37,37 @@ class BookmarksController extends Controller
         return view('admin.bookmarks.form', $data);
     }
 
+    public function search(Request $request)
+    {
+        if($request->has('query')) {
+            $bookmarks = Bookmark::with(['tags', 'category:id,title'])->where('title', 'like', '%'.$request->get('query').'%')->get();
+            return $bookmarks;
+        }
+        return [];
+    }
+
+    public function latest(Request $request)
+    {
+        $limit = $request->has('limit') ? $request->get('limit') : 10;
+        $latest_bookmarks = Bookmark::with(['tags', 'category:id,title'])->orderBy('created_at', 'desc')->take($limit)->get();
+
+        return $latest_bookmarks;
+    }
+
+    public function goTo($bookmark_id)
+    {
+        $bookmark = Bookmark::find($bookmark_id, ['id','url']);
+
+        if (!empty($bookmark)){
+            $click = new Click();
+            $click->bookmark_id = $bookmark_id;
+            $click->save();
+            return redirect($bookmark->url);
+        }
+
+        return redirect()->route('pages_bookmarks');
+    }
+
     public function store(Request $request)
     {
 
@@ -81,17 +112,4 @@ class BookmarksController extends Controller
         return redirect()->route('admin.bookmarks_index');
     }
 
-    public function goTo($bookmark_id)
-    {
-        $bookmark = Bookmark::find($bookmark_id, ['id','url']);
-
-        if (!empty($bookmark)){
-            $click = new Click();
-            $click->bookmark_id = $bookmark_id;
-            $click->save();
-            return redirect($bookmark->url);
-        }
-
-        return redirect()->route('pages_bookmarks');
-    }
 }

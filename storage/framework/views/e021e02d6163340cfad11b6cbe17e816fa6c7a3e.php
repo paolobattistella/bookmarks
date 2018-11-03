@@ -9,9 +9,10 @@
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="app">
         <?php echo $__env->yieldContent('content'); ?>
     </div>
-    <script src="../js/app.js"></script>
+    <?php echo app('Tightenco\Ziggy\BladeRouteGenerator')->generate(); ?>
+    <script type="text/javascript" src="<?php echo e(asset('js/app.js')); ?>"></script>
 </body>
 </html>
