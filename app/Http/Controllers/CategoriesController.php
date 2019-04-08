@@ -5,15 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Category;
+use App\Repositories\CategoryRepository;
+//use App\Repositories\Contracts\CategoryRepositoryContract;
 
 class CategoriesController extends Controller
 {
+    protected $category;
+
+	public function __construct(CategoryRepository $category)
+	{
+		$this->category = $category;
+	}
 
     public function index()
     {
-        $categories = Category::simplePaginate(10);
-
+        $categories = $this->category->all();
         return view('admin.categories.index', ['categories' => $categories]);
     }
 
@@ -24,9 +30,14 @@ class CategoriesController extends Controller
 
     public function edit($category_id)
     {
-        $category = DB::table('categories')->find($category_id);
+        $category = $this->category->find($category_id);
 
         return view('admin.categories.form', ['method' => __FUNCTION__, 'category' => $category]);
+    }
+
+    public function apiIndex()
+    {
+        return $this->category->all();
     }
 
     public function store(Request $request)

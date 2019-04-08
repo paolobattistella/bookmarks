@@ -54,9 +54,10 @@
                 </div>
                 <div class="field">
                     <label for="tags" class="label">Tag</label>
-                    <p class="help is-info">Inserisci i tag separati dalla virgola</p>
                     <div class="control">
-                        <textarea id="tags" name="tags" class="textarea" rows="2">{{ old('tags') ? old('tags') : '' }}</textarea>
+                        {{--<textarea id="tags" name="tags" class="textarea" rows="2">{{ old('tags') ? old('tags') : '' }}</textarea>--}}
+                        <tag-multiselect :selected="{{ $bookmark->tags }}"></tag-multiselect>
+                        {{ $bookmark->tags }}
                     </div>
                 </div>
                 <!--<div class="field">

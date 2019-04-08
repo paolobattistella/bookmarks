@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
      public function boot()
      {
+
          view()->composer('*', function($view)
          {
              $view->with('current_route_name', Route::getCurrentRoute()->getName());
@@ -27,6 +28,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        //$this->app->bind('App\Repositories\Contracts\CategoryRepositoryContract', 'App\Repositories\CategoryRepository');
     }
 }

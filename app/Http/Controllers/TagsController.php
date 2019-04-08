@@ -5,15 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Category;
+use App\Tag;
+use App\Repositories\TagRepository;
+//use App\Repositories\Contracts\TagRepositoryContract;
 
 class TagsController extends Controller
 {
+    protected $tag;
+
+	public function __construct(TagRepository $tag)
+	{
+		$this->tag = $tag;
+	}
 
     public function index()
     {
-        $tags = Tag::simplePaginate(10);
-
+        $tags = $this->tag->all();
         return view('admin.tags.index', ['tags' => $tags]);
     }
 
@@ -33,7 +40,7 @@ class TagsController extends Controller
     {
         if ($request->isMethod('post')) {
             $result = $request->validate([
-                'title'       => 'required|unique|max:255'
+                'title'       => 'required|unique:tags|max:255'
             ]);
 
             if ($request->has('id')){
@@ -49,5 +56,17 @@ class TagsController extends Controller
         }
 
         return redirect()->route('admin.tags_index');
+    }
+
+    public function delete($tag_id)
+    {
+        Tag::destroy($tag_id);
+
+        return redirect()->route('admin.tags_index');
+    }
+
+    public function apiIndex()
+    {
+        return $this->tag->all();
     }
 }

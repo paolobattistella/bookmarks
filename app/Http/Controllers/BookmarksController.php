@@ -5,19 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Bookmark;
-use App\Category;
-use App\Tag;
-use App\Click;
+use App\Models\Bookmark;
+use App\Repositories\BookmarkRepository;
+use App\Models\Category;
+use App\Models\Tag;
+use App\Models\Click;
+use App\Hasher;
 
 class BookmarksController extends Controller
 {
+    protected $bookmark;
+
+	public function __construct(BookmarkRepository $bookmark)
+	{
+		$this->bookmark = $bookmark;
+	}
 
     public function index()
     {
-        $bookmarks = Bookmark::with(['category:id,title'])->simplePaginate(10);
-
-        return view('admin.bookmarks.index', ['bookmarks' => $bookmarks]);
+        $current = Bookmark::find(1);
+        return view('admin.bookmarks.index', ['bookmarks' => $this->bookmark->index(), 'current' => $current]);
     }
 
     public function add()
@@ -28,10 +35,11 @@ class BookmarksController extends Controller
         return view('admin.bookmarks.form', $data);
     }
 
-    public function edit($bookmark_id)
+    public function edit(Request $request, Bookmark $bookmark)
     {
+        //dd($request->get('bookmark_id'));
         $data['method'] = __FUNCTION__;
-        $data['bookmark'] = Bookmark::with(['tags'])->find($bookmark_id);
+        $data['bookmark'] = $this->bookmark->edit($bookmark->id);
         $data['categories'] = Category::orderBy('title', 'asc')->get();
 
         return view('admin.bookmarks.form', $data);
@@ -49,7 +57,7 @@ class BookmarksController extends Controller
     public function latest(Request $request)
     {
         $limit = $request->has('limit') ? $request->get('limit') : 10;
-        $latest_bookmarks = Bookmark::with(['tags', 'category:id,title'])->orderBy('created_at', 'desc')->take($limit)->get();
+        $latest_bookmarks = $this->bookmark->latest($limit);
 
         return $latest_bookmarks;
     }
@@ -66,6 +74,11 @@ class BookmarksController extends Controller
         }
 
         return redirect()->route('pages_bookmarks');
+    }
+
+    public function apiIndex()
+    {
+        return $this->bookmark->index();
     }
 
     public function store(Request $request)

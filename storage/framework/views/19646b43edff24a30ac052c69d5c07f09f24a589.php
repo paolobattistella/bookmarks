@@ -54,9 +54,11 @@
                 </div>
                 <div class="field">
                     <label for="tags" class="label">Tag</label>
-                    <p class="help is-info">Inserisci i tag separati dalla virgola</p>
                     <div class="control">
-                        <textarea id="tags" name="tags" class="textarea" rows="2"><?php echo e(old('tags') ? old('tags') : ''); ?></textarea>
+                        
+                        <tag-multiselect :selected="<?php echo e($bookmark->tags); ?>"></tag-multiselect>
+                        <?php echo e($bookmark->tags); ?>
+
                     </div>
                 </div>
                 <!--<div class="field">

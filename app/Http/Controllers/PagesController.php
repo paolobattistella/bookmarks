@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Bookmark;
+use App\Models\Bookmark;
 
 class PagesController extends Controller
 {
@@ -20,10 +20,10 @@ class PagesController extends Controller
         $data = [];
         // numbers
         $data['bookmarks']['number'] = Bookmark::count();
-        $data['tags']['number'] = \App\Tag::count();
-        $data['categories']['number'] = \App\Category::count();
-        $data['clicks']['number'] = \App\Click::count();
-        $data['clicks_per_bookmark']['number'] = $data['clicks']['number'] / $data['bookmarks']['number'];
+        $data['tags']['number'] = \App\Models\Tag::count();
+        $data['categories']['number'] = \App\Models\Category::count();
+        $data['clicks']['number'] = \App\Models\Click::count();
+        $data['clicks_per_bookmark']['number'] = !empty($data['bookmarks']['number']) ? $data['clicks']['number'] / $data['bookmarks']['number'] : 0;
         // labels
         $data['bookmarks']['label'] = self::number_shorten($data['bookmarks']['number']);
         $data['tags']['label'] = self::number_shorten($data['tags']['number']);
